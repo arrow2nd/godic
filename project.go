@@ -1,4 +1,4 @@
-package main
+package godic
 
 // Owner オーナー情報
 type Owner struct {

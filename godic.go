@@ -1,4 +1,4 @@
-package main
+package godic
 
 // Godic クライアント
 type Godic struct {
