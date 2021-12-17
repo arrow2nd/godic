@@ -1,13 +1,13 @@
-package codic
+package main
 
-// Codic クライアント
-type Codic struct {
+// Godic クライアント
+type Godic struct {
 	apiKey string
 }
 
 // NewClient 作成
-func NewClient(apiKey string) *Codic {
-	return &Codic{
+func NewClient(apiKey string) *Godic {
+	return &Godic{
 		apiKey: apiKey,
 	}
 }

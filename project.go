@@ -1,6 +1,4 @@
-package codic
-
-import "encoding/json"
+package main
 
 // Owner オーナー情報
 type Owner struct {
@@ -18,16 +16,23 @@ type UserProject struct {
 }
 
 // GetUserProjectById IDからプロジェクトを取得
-func (c *Codic) GetUserProjectById(id string) (UserProject, error) {
-	bytes, err := c.client("v1/user_projects/"+id+".json", nil)
-	if err != nil {
-		return UserProject{}, err
-	}
-
+func (g *Godic) GetUserProjectById(id string) (UserProject, error) {
 	result := UserProject{}
-	if err := json.Unmarshal(bytes, &result); err != nil {
+
+	if err := g.client("v1/user_projects/"+id+".json", nil, &result); err != nil {
 		return UserProject{}, err
 	}
 
 	return result, nil
+}
+
+// GetUserProjectList プロジェクト一覧を取得
+func (g *Godic) GetUserProjectList() ([]UserProject, error) {
+	results := []UserProject{}
+
+	if err := g.client("v1/user_projects.json", nil, &results); err != nil {
+		return nil, err
+	}
+
+	return results, nil
 }

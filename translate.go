@@ -1,7 +1,6 @@
-package codic
+package main
 
 import (
-	"encoding/json"
 	"net/url"
 )
 
@@ -29,14 +28,10 @@ type Translate struct {
 }
 
 // GetTranslate ネーミング変換結果を取得
-func (c *Codic) GetTranslate(params url.Values) ([]Translate, error) {
-	bytes, err := c.client("v1/engine/translate.json", params)
-	if err != nil {
-		return nil, err
-	}
-
+func (g *Godic) GetTranslate(params url.Values) ([]Translate, error) {
 	results := []Translate{}
-	if err := json.Unmarshal(bytes, &results); err != nil {
+
+	if err := g.client("v1/engine/translate.json", params, &results); err != nil {
 		return nil, err
 	}
 

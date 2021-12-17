@@ -1,4 +1,4 @@
-package codic
+package main
 
 import (
 	"log"
