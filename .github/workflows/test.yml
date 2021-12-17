@@ -4,15 +4,20 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Create dot env file
+      - shell: bash
+        run: |
+          touch .env
+          echo "CODIC_API_KEY=${{ secrets.CODIC_API_KEY }}" >> .env
+          echo "PROJECT_ID=${{ secrets.PROJECT_ID }}" >> .env
+          echo "PROJECT_NAME=${{ secrets.PROJECT_NAME }}" >> .env
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
