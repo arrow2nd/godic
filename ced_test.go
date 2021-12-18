@@ -1,7 +1,6 @@
 package godic
 
 import (
-	"net/url"
 	"os"
 	"testing"
 )
@@ -42,11 +41,10 @@ func TestCodic_GetCEDLookup(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			v := url.Values{}
-			v.Add("query", tt.params.query)
-			v.Add("count", tt.params.count)
+			p := CreateCEDLookupParam(tt.params.query)
+			p.Add("count", tt.params.count)
 
-			got, err := c.GetCEDLookup(v)
+			got, err := c.GetCEDLookup(p)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Codic.GetCEDLookup() error = %v, wantErr %v", err, tt.wantErr)
 				return
