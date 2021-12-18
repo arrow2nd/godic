@@ -1,7 +1,6 @@
 package godic
 
 import (
-	"net/url"
 	"os"
 	"testing"
 )
@@ -42,12 +41,10 @@ func TestCodic_GetTranslate(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			p := CreateTranslateParam(tt.params.text)
+			p.Add("casing", tt.params.casing)
 
-			v := url.Values{}
-			v.Add("text", tt.params.text)
-			v.Add("casing", tt.params.casing)
-
-			got, err := c.GetTranslate(v)
+			got, err := c.GetTranslate(p)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Codic.GetTranslate() error = %v, wantErr %v", err, tt.wantErr)
 				return
